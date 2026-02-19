@@ -207,19 +207,23 @@ export const milestones = [
 
 export const nowNextLater = {
   now: [
+    'Design & implementation: Tribal Annual Report (Short Form)',
+    'Design & implementation: Tribal Plan Application',
+    'Design & implementation: Eligible Entity List',
     'ATO documentation and security controls',
-    'Form 1 (Tribal Annual Report) development',
-    'Change management stakeholder mapping'
+    'Login.gov/OKTA authentication integration'
   ],
   next: [
-    'Form 2 (Tribal Plan Application) design',
-    'Integration with OLDC system',
-    'Login.gov/OKTA implementation'
+    'User acceptance testing with tribal organizations',
+    'Integration with OLDC legacy system',
+    'Change management & training materials',
+    'ATO package submission and approval'
   ],
   later: [
-    'Forms 3+ development',
+    'Phase I production launch (tribal forms)',
     'State/Territory forms (Phase II)',
-    'Performance Management system integration'
+    'Performance Management system integration',
+    'Full CSBG Annual Report 3.0 implementation'
   ]
 };
 
