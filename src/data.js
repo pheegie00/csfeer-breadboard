@@ -11,6 +11,179 @@ export const projectInfo = {
   targetDate: "2025-09"
 };
 
+// ============================================================
+// MVP PRODUCT SPECIFICATION
+// ============================================================
+
+export const mvpSpec = {
+  vision: "Modernize and streamline the data collection and reporting process for CSBG tribal grantees, replacing legacy systems with a user-centered digital forms platform that improves data quality, reduces administrative burden, and enables better program outcomes tracking.",
+  
+  problemStatement: `The current Online Data Collection (OLDC) system presents significant challenges for tribal organizations reporting on Community Services Block Grant (CSBG) activities:
+  
+• **Outdated Technology**: The legacy system uses complex SmartForms with rigid validation rules that frustrate users and lead to data entry errors
+• **Poor User Experience**: Tribal staff struggle with non-intuitive interfaces, leading to incomplete submissions and delayed reporting cycles
+• **Manual Processes**: Data validation and quality checks require extensive manual intervention by OCS staff
+• **Limited Accessibility**: Current system doesn't meet modern accessibility standards or work well on mobile devices
+• **Integration Gaps**: Siloed data systems prevent holistic view of grantee performance and program impact`,
+
+  mvpScope: `Phase I delivers a modern forms platform for tribal CSBG grantees with three core forms:
+
+1. **CSBG Tribal Annual Report (Short Form)** - Streamlined annual outcome reporting for tribal organizations
+2. **CSBG Tribal Plan Application** - Pre-award planning and budget submission for tribal grants
+3. **CSBG Eligible Entity List** - Registry management for eligible tribal entities
+
+Key MVP capabilities:
+• Modern, accessible web interface following USWDS design standards
+• Login.gov/OKTA integration for secure authentication
+• Real-time validation with helpful error messaging
+• Auto-save and resume functionality
+• Data export and integration with OCS Performance Management system
+• Role-based access control for tribal staff and OCS reviewers`,
+
+  successMetrics: [
+    { metric: "Form Completion Rate", target: ">90%", baseline: "~75% with current OLDC system" },
+    { metric: "Time to Complete Annual Report", target: "<2 hours", baseline: "4-6 hours average" },
+    { metric: "Data Quality Score", target: ">95% submissions without errors", baseline: "~70%" },
+    { metric: "User Satisfaction (SUS Score)", target: ">80", baseline: "Not measured" },
+    { metric: "Accessibility Compliance", target: "WCAG 2.1 AA", baseline: "Not compliant" }
+  ]
+};
+
+// ============================================================
+// PROJECT IMPORTANCE & IMPACT
+// ============================================================
+
+export const projectImportance = {
+  headline: "Empowering Tribal Communities Through Better Data",
+  
+  whyItMatters: `The Community Services Block Grant program provides $770 million annually to fight poverty across America. For tribal communities, CSBG funding is often the primary federal resource supporting:
+
+• Employment and education services
+• Emergency assistance and crisis intervention  
+• Housing stability and utility assistance
+• Nutrition programs and food security
+• Health and wellness initiatives
+
+**The reporting burden on tribal organizations directly impacts their capacity to deliver services.** Every hour spent fighting with legacy forms is an hour not spent helping community members. CSFEER's mission is to flip that equation—making reporting effortless so tribal staff can focus on their communities.`,
+
+  strategicAlignment: [
+    "ACF Digital Transformation Initiative - Modernizing citizen-facing services",
+    "Federal Plain Language Act - Clear, accessible government communications",
+    "21st Century IDEA - Digital-first service delivery mandate",
+    "Executive Order on Customer Experience - Reducing administrative burden",
+    "OMB Circular A-11 Section 280 - Improving federal service delivery"
+  ],
+
+  impactNumbers: {
+    tribalOrgsServed: 66,
+    annualFunding: "$770 million",
+    individualsServedByCSBG: "10+ million",
+    householdsServed: "5+ million",
+    currentFormCompletionTime: "4-6 hours",
+    targetFormCompletionTime: "<2 hours"
+  }
+};
+
+// ============================================================
+// USERS & PERSONAS
+// ============================================================
+
+export const users = [
+  {
+    id: "tribal-admin",
+    name: "Tribal Program Administrator",
+    icon: "👤",
+    description: "Primary form submitter at tribal organizations",
+    responsibilities: [
+      "Complete annual reports and plan applications",
+      "Gather data from local service providers",
+      "Coordinate with tribal leadership on submissions",
+      "Maintain organizational profile and eligible entity info"
+    ],
+    painPoints: [
+      "Limited time—wears many hats beyond reporting",
+      "Unreliable internet connectivity in some areas",
+      "Complex validation rules unclear in current system",
+      "No ability to save progress and return later"
+    ],
+    needs: [
+      "Simple, intuitive interface that works on any device",
+      "Clear guidance on what data is needed",
+      "Ability to save drafts and collaborate with others",
+      "Offline capability for areas with poor connectivity"
+    ],
+    count: "~100 users across 66 tribal organizations"
+  },
+  {
+    id: "tribal-director",
+    name: "Tribal CSBG Director",
+    icon: "👔",
+    description: "Leadership overseeing CSBG programs at tribal level",
+    responsibilities: [
+      "Review and approve submissions before final filing",
+      "Strategic planning for CSBG-funded programs",
+      "Liaison with OCS federal staff",
+      "Ensure compliance with grant requirements"
+    ],
+    painPoints: [
+      "Limited visibility into submission status",
+      "Difficult to track year-over-year trends",
+      "Manual process to get data for board reports"
+    ],
+    needs: [
+      "Dashboard view of submission status",
+      "Historical data comparison",
+      "Export capabilities for reporting to tribal council"
+    ],
+    count: "~66 directors"
+  },
+  {
+    id: "ocs-program-specialist",
+    name: "OCS Program Specialist",
+    icon: "🏛️",
+    description: "Federal staff managing tribal CSBG programs",
+    responsibilities: [
+      "Review submitted reports for completeness",
+      "Provide technical assistance to tribal grantees",
+      "Monitor program compliance",
+      "Aggregate data for reports to Congress"
+    ],
+    painPoints: [
+      "Manual data quality checks consume significant time",
+      "Difficult to identify grantees needing assistance",
+      "Data lives in multiple disconnected systems"
+    ],
+    needs: [
+      "Automated validation and quality scoring",
+      "Early warning indicators for at-risk submissions",
+      "Unified view across all tribal grantees"
+    ],
+    count: "~10 specialists in DCA"
+  },
+  {
+    id: "ocs-leadership",
+    name: "OCS Leadership",
+    icon: "⭐",
+    description: "Division directors and office leadership",
+    responsibilities: [
+      "Program oversight and policy decisions",
+      "Congressional reporting and testimony",
+      "Strategic direction for CSBG modernization"
+    ],
+    painPoints: [
+      "Delayed access to aggregate program data",
+      "Manual report generation for Congress",
+      "Limited real-time visibility into program health"
+    ],
+    needs: [
+      "Executive dashboards with key metrics",
+      "Automated Congressional report generation",
+      "Trend analysis and predictive insights"
+    ],
+    count: "~5 leadership staff"
+  }
+];
+
 export const milestones = [
   { id: 'm1', title: 'Project Kickoff', workstream: 'PM', status: 'complete', date: '2025-01-15', desc: 'Initial team onboarding and project charter' },
   { id: 'm2', title: 'Discovery & Research', workstream: 'Design', status: 'complete', date: '2025-02-01', desc: 'User research and stakeholder interviews' },
@@ -244,24 +417,69 @@ export const risks = [
 
 export const csbgProgram = {
   name: 'Community Services Block Grant',
-  description: 'Federal program providing funds to states, territories, and tribal organizations to reduce poverty and empower low-income communities.',
-  funding: '$790 million annually',
+  fullName: 'Community Services Block Grant (CSBG)',
+  legislativeAuthority: 'Community Opportunities, Accountability, and Training and Educational Services Human Services Reauthorization Act of 1998 (P.L. 105-285)',
+  
+  description: 'The Community Services Block Grant (CSBG) is a federally funded block grant that provides funds to states, territories, and tribes to support services that alleviate the causes and conditions of poverty in under-resourced communities. Over 9 million individuals are served by CSBG-funded programs annually.',
+  
+  purpose: 'To support services and activities for individuals and families with low incomes that alleviate the causes and conditions of poverty in communities.',
+  
+  funding: {
+    fy2024: '$770 million',
+    fy2023: '$770 million',
+    fy2022: '$755 million'
+  },
+  
   recipients: {
     states: 50,
     territories: 5,
-    tribalOrgs: 66
+    tribalOrgs: 66,
+    communityActionAgencies: 1000
   },
-  keyForms: [
-    'CSBG Annual Report',
-    'CSBG State Plan',
-    'CSBG Tribal Annual Report',
-    'CSBG Tribal Plan Application',
-    'Eligible Entity List'
+  
+  impact: {
+    individualsServed: '10+ million',
+    householdsServed: '5+ million',
+    multigenerationalHouseholds: '94,000',
+    housingStabilized: '437,000 individuals avoided eviction or obtained safe housing',
+    energyAssistance: '4+ million individuals with reduced energy burden',
+    childrenServed: '1 million (ages 0-5)',
+    individualsWithDisabilities: '1.5 million',
+    olderAdults: '1.3 million (65+)',
+    olderAdultsIndependentLiving: '555,000 maintained independent living'
+  },
+  
+  servicesProvided: [
+    'Employment and job training programs',
+    'Education services (adult literacy, GED prep, college readiness)',
+    'Housing assistance and homelessness prevention',
+    'Nutrition programs and food security',
+    'Utility and energy assistance',
+    'Transportation services',
+    'Emergency and crisis intervention',
+    'Health and wellness programs',
+    'Financial literacy and asset building',
+    'Child and youth development programs'
   ],
+  
+  keyForms: [
+    { name: 'CSBG Annual Report', version: '3.0', scope: 'States/Territories' },
+    { name: 'CSBG State Plan', version: '3.0', scope: 'States/Territories' },
+    { name: 'CSBG Tribal Annual Report (Short Form)', version: '1.0', scope: 'Tribal - Phase I' },
+    { name: 'CSBG Tribal Plan Application', version: '1.0', scope: 'Tribal - Phase I' },
+    { name: 'Eligible Entity List', version: '1.0', scope: 'All grantees' }
+  ],
+  
   relatedPrograms: [
-    'LIHEAP - Low Income Home Energy Assistance',
-    'SSBG - Social Services Block Grant',
-    'CED - Community Economic Development',
-    'RCD - Rural Community Development'
-  ]
+    { abbrev: 'LIHEAP', name: 'Low Income Home Energy Assistance Program', desc: 'Helps low-income households with energy costs' },
+    { abbrev: 'SSBG', name: 'Social Services Block Grant', desc: 'Flexible funding for social services' },
+    { abbrev: 'CED', name: 'Community Economic Development', desc: 'Supports businesses creating jobs in low-income areas' },
+    { abbrev: 'RCD', name: 'Rural Community Development', desc: 'Technical assistance for rural communities' }
+  ],
+  
+  contacts: {
+    statePrograms: 'CSBGStates@acf.hhs.gov',
+    tribalPrograms: 'CSBGTribes@acf.hhs.gov',
+    phone: '(202) 401-9380'
+  }
 };

@@ -1,54 +1,221 @@
 import { useState, useMemo } from 'react';
-import { projectInfo, milestones, nowNextLater, forms, stakeholders, acfOrgChart, tribalOrgs, risks, csbgProgram } from './data.js';
+import { projectInfo, milestones, nowNextLater, forms, stakeholders, acfOrgChart, tribalOrgs, risks, csbgProgram, mvpSpec, projectImportance, users } from './data.js';
 
 // Tab Components
 function OverviewTab() {
-  const complete = milestones.filter(m => m.status === 'complete').length;
-  const inProgress = milestones.filter(m => m.status === 'in-progress').length;
-  const planned = milestones.filter(m => m.status === 'planned').length;
-  const progress = Math.round((complete / milestones.length) * 100);
+  const [section, setSection] = useState('mvp');
 
   return (
     <div>
-      <h2 className="section-title">Focus Delivery Framework</h2>
-      <div className="grid-3">
-        <div className="card" style={{ borderLeftColor: '#00a91c' }}>
-          <h3>🎯 Now</h3>
-          <ul className="card-list">
-            {nowNextLater.now.map((item, i) => <li key={i}>{item}</li>)}
-          </ul>
-        </div>
-        <div className="card" style={{ borderLeftColor: '#ffbe2e' }}>
-          <h3>⏭️ Next</h3>
-          <ul className="card-list">
-            {nowNextLater.next.map((item, i) => <li key={i}>{item}</li>)}
-          </ul>
-        </div>
-        <div className="card" style={{ borderLeftColor: '#71767a' }}>
-          <h3>📅 Later</h3>
-          <ul className="card-list">
-            {nowNextLater.later.map((item, i) => <li key={i}>{item}</li>)}
-          </ul>
-        </div>
-      </div>
-
-      <h2 className="section-title" style={{ marginTop: '2rem' }}>CSBG Program Context</h2>
-      <div className="card">
-        <h3>📊 {csbgProgram.name}</h3>
-        <p>{csbgProgram.description}</p>
-        <p style={{ marginTop: '0.5rem' }}><strong>Annual Funding:</strong> {csbgProgram.funding}</p>
-        <p><strong>Recipients:</strong> {csbgProgram.recipients.states} States, {csbgProgram.recipients.territories} Territories, {csbgProgram.recipients.tribalOrgs} Tribal Organizations</p>
-      </div>
-
-      <h2 className="section-title" style={{ marginTop: '2rem' }}>Related OCS Programs</h2>
-      <div className="grid-3">
-        {csbgProgram.relatedPrograms.map((prog, i) => (
-          <div key={i} className="card">
-            <h3>{prog.split(' - ')[0]}</h3>
-            <p>{prog.split(' - ')[1]}</p>
-          </div>
+      <div className="filter-bar" style={{ marginBottom: '1.5rem' }}>
+        {[
+          { id: 'mvp', label: '📋 MVP Spec' },
+          { id: 'importance', label: '💡 Why It Matters' },
+          { id: 'users', label: '👥 Users' },
+          { id: 'csbg', label: '📊 CSBG Program' },
+          { id: 'delivery', label: '🎯 Delivery' }
+        ].map(s => (
+          <button
+            key={s.id}
+            className={`filter-btn ${section === s.id ? 'active' : ''}`}
+            onClick={() => setSection(s.id)}
+          >
+            {s.label}
+          </button>
         ))}
       </div>
+
+      {section === 'mvp' && (
+        <div>
+          <h2 className="section-title">Product Vision</h2>
+          <div className="card" style={{ marginBottom: '1.5rem', background: 'linear-gradient(135deg, #e8f4fd 0%, #f0f0f0 100%)' }}>
+            <p style={{ fontSize: '1.1rem', fontStyle: 'italic', color: '#1a4480' }}>{mvpSpec.vision}</p>
+          </div>
+
+          <h2 className="section-title">Problem Statement</h2>
+          <div className="card" style={{ marginBottom: '1.5rem' }}>
+            <div style={{ whiteSpace: 'pre-line', fontSize: '0.9rem' }} dangerouslySetInnerHTML={{ __html: mvpSpec.problemStatement.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
+          </div>
+
+          <h2 className="section-title">Phase I MVP Scope</h2>
+          <div className="card" style={{ marginBottom: '1.5rem' }}>
+            <div style={{ whiteSpace: 'pre-line', fontSize: '0.9rem' }} dangerouslySetInnerHTML={{ __html: mvpSpec.mvpScope.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
+          </div>
+
+          <h2 className="section-title">Success Metrics</h2>
+          <div className="grid-3">
+            {mvpSpec.successMetrics.map((m, i) => (
+              <div key={i} className="card">
+                <h3>{m.metric}</h3>
+                <p style={{ fontSize: '1.5rem', color: '#00a91c', fontWeight: 'bold' }}>{m.target}</p>
+                <p style={{ fontSize: '0.8rem', color: '#71767a' }}>Baseline: {m.baseline}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {section === 'importance' && (
+        <div>
+          <h2 className="section-title">{projectImportance.headline}</h2>
+          <div className="card" style={{ marginBottom: '1.5rem' }}>
+            <div style={{ whiteSpace: 'pre-line', fontSize: '0.95rem' }} dangerouslySetInnerHTML={{ __html: projectImportance.whyItMatters.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
+          </div>
+
+          <h2 className="section-title">Impact by the Numbers</h2>
+          <div className="grid-3">
+            <div className="card" style={{ textAlign: 'center' }}>
+              <p style={{ fontSize: '2rem', fontWeight: 'bold', color: '#005ea2' }}>{projectImportance.impactNumbers.tribalOrgsServed}</p>
+              <p>Tribal Organizations Served</p>
+            </div>
+            <div className="card" style={{ textAlign: 'center' }}>
+              <p style={{ fontSize: '2rem', fontWeight: 'bold', color: '#005ea2' }}>{projectImportance.impactNumbers.annualFunding}</p>
+              <p>Annual CSBG Funding</p>
+            </div>
+            <div className="card" style={{ textAlign: 'center' }}>
+              <p style={{ fontSize: '2rem', fontWeight: 'bold', color: '#005ea2' }}>{projectImportance.impactNumbers.individualsServedByCSBG}</p>
+              <p>Individuals Served Annually</p>
+            </div>
+          </div>
+
+          <h2 className="section-title" style={{ marginTop: '1.5rem' }}>Strategic Alignment</h2>
+          <div className="card">
+            <ul className="card-list">
+              {projectImportance.strategicAlignment.map((item, i) => (
+                <li key={i}>✓ {item}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
+
+      {section === 'users' && (
+        <div>
+          <h2 className="section-title">System Users & Personas</h2>
+          <div className="grid-3">
+            {users.map(user => (
+              <div key={user.id} className="card" style={{ borderLeftColor: '#005ea2' }}>
+                <h3>{user.icon} {user.name}</h3>
+                <p style={{ fontSize: '0.85rem', marginBottom: '0.75rem' }}>{user.description}</p>
+                <p style={{ fontSize: '0.75rem', color: '#71767a' }}>{user.count}</p>
+                
+                <details style={{ marginTop: '0.75rem' }}>
+                  <summary style={{ cursor: 'pointer', fontSize: '0.85rem', color: '#005ea2' }}>Responsibilities</summary>
+                  <ul style={{ fontSize: '0.8rem', paddingLeft: '1rem', marginTop: '0.5rem' }}>
+                    {user.responsibilities.map((r, i) => <li key={i}>{r}</li>)}
+                  </ul>
+                </details>
+                
+                <details style={{ marginTop: '0.5rem' }}>
+                  <summary style={{ cursor: 'pointer', fontSize: '0.85rem', color: '#d83933' }}>Pain Points</summary>
+                  <ul style={{ fontSize: '0.8rem', paddingLeft: '1rem', marginTop: '0.5rem' }}>
+                    {user.painPoints.map((p, i) => <li key={i}>{p}</li>)}
+                  </ul>
+                </details>
+                
+                <details style={{ marginTop: '0.5rem' }}>
+                  <summary style={{ cursor: 'pointer', fontSize: '0.85rem', color: '#00a91c' }}>Needs</summary>
+                  <ul style={{ fontSize: '0.8rem', paddingLeft: '1rem', marginTop: '0.5rem' }}>
+                    {user.needs.map((n, i) => <li key={i}>{n}</li>)}
+                  </ul>
+                </details>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {section === 'csbg' && (
+        <div>
+          <h2 className="section-title">About the CSBG Program</h2>
+          <div className="card" style={{ marginBottom: '1.5rem' }}>
+            <h3>📊 {csbgProgram.fullName}</h3>
+            <p style={{ marginTop: '0.5rem' }}>{csbgProgram.description}</p>
+            <p style={{ marginTop: '0.75rem', fontStyle: 'italic', fontSize: '0.9rem', color: '#1a4480' }}>
+              <strong>Purpose:</strong> {csbgProgram.purpose}
+            </p>
+            <p style={{ marginTop: '0.5rem', fontSize: '0.8rem', color: '#71767a' }}>
+              Legislative Authority: {csbgProgram.legislativeAuthority}
+            </p>
+          </div>
+
+          <h2 className="section-title">FY2023 Program Impact</h2>
+          <div className="grid-3">
+            <div className="card" style={{ textAlign: 'center' }}>
+              <p style={{ fontSize: '1.75rem', fontWeight: 'bold', color: '#005ea2' }}>{csbgProgram.impact.individualsServed}</p>
+              <p>Individuals Served</p>
+            </div>
+            <div className="card" style={{ textAlign: 'center' }}>
+              <p style={{ fontSize: '1.75rem', fontWeight: 'bold', color: '#005ea2' }}>{csbgProgram.impact.householdsServed}</p>
+              <p>Households Served</p>
+            </div>
+            <div className="card" style={{ textAlign: 'center' }}>
+              <p style={{ fontSize: '1.75rem', fontWeight: 'bold', color: '#00a91c' }}>{csbgProgram.impact.housingStabilized}</p>
+              <p>Housing Stability</p>
+            </div>
+            <div className="card" style={{ textAlign: 'center' }}>
+              <p style={{ fontSize: '1.75rem', fontWeight: 'bold', color: '#005ea2' }}>{csbgProgram.impact.childrenServed}</p>
+              <p>Children (0-5) Served</p>
+            </div>
+            <div className="card" style={{ textAlign: 'center' }}>
+              <p style={{ fontSize: '1.75rem', fontWeight: 'bold', color: '#005ea2' }}>{csbgProgram.impact.olderAdults}</p>
+              <p>Older Adults Served</p>
+            </div>
+            <div className="card" style={{ textAlign: 'center' }}>
+              <p style={{ fontSize: '1.75rem', fontWeight: 'bold', color: '#005ea2' }}>{csbgProgram.impact.individualsWithDisabilities}</p>
+              <p>People with Disabilities</p>
+            </div>
+          </div>
+
+          <h2 className="section-title" style={{ marginTop: '1.5rem' }}>Services Provided by CSBG Network</h2>
+          <div className="card">
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '0.5rem' }}>
+              {csbgProgram.servicesProvided.map((service, i) => (
+                <div key={i} style={{ padding: '0.5rem', background: '#f0f0f0', borderRadius: '4px', fontSize: '0.85rem' }}>
+                  ✓ {service}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <h2 className="section-title" style={{ marginTop: '1.5rem' }}>Related OCS Programs</h2>
+          <div className="grid-3">
+            {csbgProgram.relatedPrograms.map((prog, i) => (
+              <div key={i} className="card">
+                <h3>{prog.abbrev}</h3>
+                <p style={{ fontWeight: '500', fontSize: '0.9rem' }}>{prog.name}</p>
+                <p style={{ fontSize: '0.85rem', color: '#71767a' }}>{prog.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {section === 'delivery' && (
+        <div>
+          <h2 className="section-title">Focus Delivery Framework</h2>
+          <div className="grid-3">
+            <div className="card" style={{ borderLeftColor: '#00a91c' }}>
+              <h3>🎯 Now</h3>
+              <ul className="card-list">
+                {nowNextLater.now.map((item, i) => <li key={i}>{item}</li>)}
+              </ul>
+            </div>
+            <div className="card" style={{ borderLeftColor: '#ffbe2e' }}>
+              <h3>⏭️ Next</h3>
+              <ul className="card-list">
+                {nowNextLater.next.map((item, i) => <li key={i}>{item}</li>)}
+              </ul>
+            </div>
+            <div className="card" style={{ borderLeftColor: '#71767a' }}>
+              <h3>📅 Later</h3>
+              <ul className="card-list">
+                {nowNextLater.later.map((item, i) => <li key={i}>{item}</li>)}
+              </ul>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
