@@ -1,0 +1,342 @@
+:root {
+  --acf-blue: #005ea2;
+  --acf-blue-dark: #1a4480;
+  --acf-rust: #d83933;
+  --acf-amber: #ffbe2e;
+  --acf-green: #00a91c;
+  --acf-gray: #71767a;
+  --acf-light: #f0f0f0;
+  --acf-white: #ffffff;
+  --acf-text: #1b1b1b;
+  --shadow: 0 2px 8px rgba(0,0,0,0.1);
+  --radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  background: var(--acf-light);
+  color: var(--acf-text);
+  line-height: 1.5;
+}
+
+.app {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.header {
+  background: linear-gradient(135deg, var(--acf-blue) 0%, var(--acf-blue-dark) 100%);
+  color: white;
+  padding: 1.5rem 2rem;
+  border-radius: var(--radius);
+  margin-bottom: 1rem;
+}
+
+.header h1 {
+  font-size: 1.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.header p {
+  opacity: 0.9;
+  font-size: 0.9rem;
+}
+
+.status-banner {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.progress-bar {
+  flex: 1;
+  min-width: 200px;
+}
+
+.progress-bar .bar {
+  height: 8px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-bar .fill {
+  height: 100%;
+  background: var(--acf-green);
+  transition: width 0.3s;
+}
+
+.progress-bar span {
+  font-size: 0.8rem;
+  opacity: 0.9;
+}
+
+.stat-pills {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.pill {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.pill.green { background: var(--acf-green); }
+.pill.amber { background: var(--acf-amber); color: #1b1b1b; }
+.pill.gray { background: var(--acf-gray); }
+.pill.blue { background: var(--acf-blue); }
+.pill.red { background: var(--acf-rust); }
+
+.tabs {
+  display: flex;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+  background: var(--acf-white);
+  padding: 0.5rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  flex-wrap: wrap;
+}
+
+.tab {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.tab:hover {
+  background: var(--acf-light);
+}
+
+.tab.active {
+  background: var(--acf-blue);
+  color: white;
+}
+
+.content {
+  background: var(--acf-white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+  min-height: 500px;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  background: var(--acf-light);
+  border-radius: var(--radius);
+  padding: 1rem;
+  border-left: 4px solid var(--acf-blue);
+}
+
+.card h3 {
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  color: var(--acf-blue-dark);
+}
+
+.card p {
+  font-size: 0.85rem;
+  color: var(--acf-gray);
+}
+
+.card-list {
+  list-style: none;
+}
+
+.card-list li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  font-size: 0.85rem;
+}
+
+.filter-bar {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.filter-btn {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--acf-gray);
+  background: white;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: all 0.2s;
+}
+
+.filter-btn:hover {
+  border-color: var(--acf-blue);
+}
+
+.filter-btn.active {
+  background: var(--acf-blue);
+  color: white;
+  border-color: var(--acf-blue);
+}
+
+.search-input {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--acf-gray);
+  border-radius: 20px;
+  font-size: 0.8rem;
+  min-width: 200px;
+}
+
+.milestone-card {
+  border-left-color: var(--acf-blue);
+}
+
+.milestone-card.complete { border-left-color: var(--acf-green); }
+.milestone-card.in-progress { border-left-color: var(--acf-amber); }
+.milestone-card.planned { border-left-color: var(--acf-gray); }
+
+.badge {
+  display: inline-block;
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  margin-left: 0.5rem;
+}
+
+.badge.fed { background: #e8f4fd; color: var(--acf-blue); }
+.badge.ctr { background: #f3e8fd; color: #7c3aed; }
+.badge.tier1 { background: var(--acf-rust); color: white; }
+.badge.tier2 { background: var(--acf-amber); color: #1b1b1b; }
+.badge.tier3 { background: var(--acf-gray); color: white; }
+
+.stakeholder-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.stakeholder-info h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.org-tree {
+  padding: 1rem;
+  background: var(--acf-light);
+  border-radius: var(--radius);
+}
+
+.tree-node {
+  padding: 0.5rem;
+  margin: 0.25rem 0;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.tree-node:hover {
+  background: rgba(0,94,162,0.1);
+}
+
+.tree-node.highlight {
+  background: rgba(216,57,51,0.1);
+  border-left: 3px solid var(--acf-rust);
+}
+
+.tree-children {
+  margin-left: 1.5rem;
+  border-left: 1px dashed var(--acf-gray);
+  padding-left: 0.5rem;
+}
+
+.risk-card {
+  border-left-color: var(--acf-rust);
+}
+
+.risk-card.high { border-left-color: var(--acf-rust); }
+.risk-card.medium { border-left-color: var(--acf-amber); }
+.risk-card.low { border-left-color: var(--acf-green); }
+
+.section-title {
+  font-size: 1.1rem;
+  color: var(--acf-blue-dark);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--acf-light);
+}
+
+.form-card {
+  border-left-color: var(--acf-blue);
+}
+
+.form-status {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.tribal-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 0.5rem;
+}
+
+.tribal-item {
+  padding: 0.5rem;
+  background: var(--acf-light);
+  border-radius: 4px;
+  font-size: 0.85rem;
+}
+
+.counter {
+  background: var(--acf-light);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  margin-left: auto;
+}
+
+.toggle-view {
+  margin-left: auto;
+  display: flex;
+  gap: 0.25rem;
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 1rem;
+  }
+  
+  .header h1 {
+    font-size: 1.25rem;
+  }
+  
+  .status-banner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .content {
+    padding: 1rem;
+  }
+}
